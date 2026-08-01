@@ -1,0 +1,57 @@
+# Keep Formula/bizcoder.rb in step with the latest version published to npm.
+#
+# This runs inside the tap repo on purpose: the built-in GITHUB_TOKEN can write
+# here, so no cross-repo credential is needed anywhere. It reads only public npm
+# metadata and tarballs.
+name: sync
+
+on:
+  schedule:
+    # Hourly — a new release shows up in the tap within the hour.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to pin (blank = latest on npm)"
+        required: false
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build formula
+        run: |
+          set -euo pipefail
+          node scripts/build-formula.mjs ${{ inputs.version }} > /tmp/bizcoder.rb
+          # A half-written formula must never reach the tap: a bad checksum makes
+          # `brew install` fail, and users just see "the install is broken".
+          grep -q "class Bizcoder < Formula" /tmp/bizcoder.rb
+          test "$(grep -c 'sha256 "' /tmp/bizcoder.rb)" -eq 4
+          echo "VERSION=$(sed -n 's/^  version "\(.*\)"$/\1/p' /tmp/bizcoder.rb)" >> "$GITHUB_ENV"
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          cp /tmp/bizcoder.rb Formula/bizcoder.rb
+          if git diff --quiet; then
+            echo "Already at ${VERSION} — nothing to do."
+            exit 0
+          fi
+          git config user.name "latemonk"
+          git config user.email "63733683+latemonk@users.noreply.github.com"
+          git add Formula/bizcoder.rb
+          git commit -m "chore: update formula to ${VERSION}"
+          git push origin HEAD

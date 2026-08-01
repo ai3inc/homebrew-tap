@@ -1,6 +1,5 @@
-# 이 파일은 자동 생성됩니다 — 손으로 고치지 마세요.
-# 생성기: wrks-code-cli/script/brew-formula.ts (npm 레지스트리가 정본)
-# 갱신:   .github/workflows/brew-tap-sync.yml
+# Generated file — do not edit by hand.
+# Generator: scripts/build-formula.mjs   Updater: .github/workflows/sync.yml
 class Bizcoder < Formula
   desc "Business AI coding agent"
   homepage "https://bizcoder.ai"
