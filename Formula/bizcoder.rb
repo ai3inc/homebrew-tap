@@ -3,28 +3,28 @@
 class Bizcoder < Formula
   desc "Business AI coding agent"
   homepage "https://bizcoder.ai"
-  version "0.3.192"
+  version "0.3.193"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://registry.npmjs.org/bizcoder-darwin-arm64/-/bizcoder-darwin-arm64-0.3.192.tgz"
-      sha256 "ddc59cd91f87245b106725c2fa77cd5a1e69acb7dbd4503756e1d8aabb96c34b"
+      url "https://registry.npmjs.org/bizcoder-darwin-arm64/-/bizcoder-darwin-arm64-0.3.193.tgz"
+      sha256 "6bf81dd9d8965335e1a431d07bc9c84295cb30ec7f0c71ca7cafa68c75dd22c8"
     end
     on_intel do
-      url "https://registry.npmjs.org/bizcoder-darwin-x64/-/bizcoder-darwin-x64-0.3.192.tgz"
-      sha256 "948cdae9d66cb48f2546737cf292c8dc2bc724956a6da8e83732bb3fbfff8a30"
+      url "https://registry.npmjs.org/bizcoder-darwin-x64/-/bizcoder-darwin-x64-0.3.193.tgz"
+      sha256 "0ab731ca8fb7c29c0df9631b89f81ab1215e67fa001d4ff878a2edbae9d22e9d"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://registry.npmjs.org/bizcoder-linux-arm64/-/bizcoder-linux-arm64-0.3.192.tgz"
-      sha256 "8eab5f67727283d3a545fa9e1d201d729616f3aae8071f252d6211f2a77e85a2"
+      url "https://registry.npmjs.org/bizcoder-linux-arm64/-/bizcoder-linux-arm64-0.3.193.tgz"
+      sha256 "2fe71f342d0acfef3029949338add159526ee2b293b132826ca541d3b7329829"
     end
     on_intel do
-      url "https://registry.npmjs.org/bizcoder-linux-x64/-/bizcoder-linux-x64-0.3.192.tgz"
-      sha256 "b53e3c0a8426e7a8533727dc3c6ab35d55b956d7bb56d2f4ea7a2363e67a6a05"
+      url "https://registry.npmjs.org/bizcoder-linux-x64/-/bizcoder-linux-x64-0.3.193.tgz"
+      sha256 "df0dd05f1014518a4e800c752d00b361303adb953e9991f7709e17bc170e4383"
     end
   end
 
